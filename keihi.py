@@ -30,4 +30,4 @@ df = pd.DataFrame({
 df = df.rename(index=lambda x: x + 1)
 df.index.name = 'No'
 
-st.write(df)
+st.table(df)
