@@ -1,22 +1,24 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-from sklearn.linear_model import LogisticRegression
-from sklearn.datasets import load_iris
+
 
 st.sidebar.header('新規入力')
-name = st.sidebar.text_input('氏名')
-category = st.sidebar.text_input('費目')
-amount = st.sidebar.text_input('費用')
-tax = st.sidebar.text_input('消費税')
-approval = st.sidebar.text_input('承認済み')
+with st.sidebar.form("my_form", clear_on_submit=True):
+    button = False
+    name = st.text_input('氏名') 
+    category = st.text_input('費目')
+    amount = st.text_input('費用')
+    tax = st.text_input('消費税')
+    approval = st.text_input('承認済み')
+    button = st.form_submit_button(label='click me!')
 
 st.title('入力結果')
-'氏名：' , name
-'費目：' , category
-'費用：' , amount
-'消費税：' , tax
-'承認済み：' , approval
+'氏名：' , name if button else ''
+'費目：' , category if button else ''
+'費用：' , amount if button else ''
+'消費税：' , tax if button else ''
+'承認済み：' , approval if button else ''
 
 st.title('経費一覧')
 
@@ -27,7 +29,7 @@ df = pd.DataFrame({
     '消費税' : [300, 90, 1500, 1000, 800, 40, 250, 90, 90, 300],
     '承認' : ['あり', 'なし', 'なし', 'あり', 'あり', 'なし', 'あり', 'なし', 'なし', 'あり']
 })
-df = df.rename(index=lambda x: x + 1)
-df.index.name = 'No'
+# df = df.rename(index=lambda x: x + 1)
+# df.index.name = 'No'
 
 st.table(df)
